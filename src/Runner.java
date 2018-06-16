@@ -13,6 +13,14 @@ public class Runner {
         return new float[]{0f, 0f, 0f};
     }
 
+    /**
+     * for 0 it should be 0. edge cases are negative numbers. also edge case that it can't be greater than current system time.
+     * for 1 it should be 1/60 * (2*pi), as 60 seconds makes the full circle.
+     * for 360, it should ideally say 0, since they are the same, so modulo as well.
+     *
+     * @param time
+     * @return
+     */
     static float calculateSecondHandAngle(int time) {
         return 0;
     }
