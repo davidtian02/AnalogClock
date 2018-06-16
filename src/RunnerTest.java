@@ -76,7 +76,7 @@ public class RunnerTest {
     public void calculateMinuteHandAngle_withOverFullCircle_shouldReturnBaseValue() {
         int time1 = 3600;
         int time2 = 3607;
-        float delta = 0.001f;
+        float delta = 0.000001f;
         float expected1 = (float) (0/(60f * 60) * 2 * Math.PI);
         float expected2 = (float) (7/(60f * 60) * 2 * Math.PI);
 
@@ -90,7 +90,41 @@ public class RunnerTest {
     // ========================== testing hours ==========================
 
     @Test
-    public void calculateHourHandAngle() {
+    public void calculateHourHandAngle_withNonZeroValue_shouldReturnAngle() {
+        int time1 = 1;
+        int time2 = 3600; // one hour exact
+        float delta = 0.000001f;
+        float expected1 = (float) (   1/(60f * 60 * 12) * 2 * Math.PI);
+        float expected2 = (float) (3600/(60f * 60 * 12) * 2 * Math.PI);
 
+        float result1 = Runner.calculateHourHandAngle(time1);
+        float result2 = Runner.calculateHourHandAngle(time2);
+
+        assertEquals(expected1, result1, delta);
+        assertEquals(expected2, result2, delta);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void calculateHourHandAngle_withNegativeValue_shouldThrowException() {
+        int time = -1;
+
+        Runner.calculateHourHandAngle(time);
+
+        // no - op
+    }
+
+    @Test
+    public void calculateHourHandAngle_withOverFullCircle_shouldReturnBaseValue() {
+        int time1 = 43200; // one full circle of hours
+        int time2 = 86410; // one day and 10 seconds
+        float delta = 0.000001f;
+        float expected1 = (float) ( 0/(60f * 60 * 12) * 2 * Math.PI);
+        float expected2 = (float) (10/(60f * 60 * 12) * 2 * Math.PI);
+
+        float result1 = Runner.calculateHourHandAngle(time1);
+        float result2 = Runner.calculateHourHandAngle(time2);
+
+        assertEquals(expected1, result1, delta);
+        assertEquals(expected2, result2, delta);
     }
 }
