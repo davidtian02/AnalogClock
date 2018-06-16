@@ -12,4 +12,16 @@ public class Runner {
     static float[] calculateAngles(int time) {
         return new float[]{0f, 0f, 0f};
     }
+
+    static float calculateSecondHandAngle(int time) {
+        return 0;
+    }
+
+    static float calculateMinuteHandAngle(int time) {
+        return 0;
+    }
+
+    static float calculateHourHandAngle(int time) {
+        return 0;
+    }
 }
