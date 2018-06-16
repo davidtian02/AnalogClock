@@ -23,7 +23,7 @@ public class Runner {
      * @return the radian of the seconds hand
      */
     static float calculateSecondHandAngle(int time) {
-        checkSanity(time);
+        validateInput(time);
 
         return (float) (((time % 60) / 60f) * 2 * Math.PI);
     }
@@ -34,16 +34,28 @@ public class Runner {
      * @return the radian of the minutes hand
      */
     static float calculateMinuteHandAngle(int time) {
-        checkSanity(time);
+        validateInput(time);
 
         return (float) (((time % (60*60)) / (60*60f)) * 2 * Math.PI); // TODO apply some optimization on math here
     }
 
+    /**
+     * same as seconds, but for minutes, so need to go at a much slower rate... 60x slower, in fact.
+     * @param time in seconds, since epoch
+     * @return the radian of the minutes hand
+     */
     static float calculateHourHandAngle(int time) {
-        return 0;
+        validateInput(time);
+
+        return (float) (((time % (12*60*60)) / (12*60*60f)) * 2 * Math.PI);
     }
 
-    private static void checkSanity(int time) {
+    /**
+     * this method just checks if the input is valid
+     *
+     * @param time in seconds, since epoch
+     */
+    private static void validateInput(int time) {
         if (time < 0) {
             throw new IllegalArgumentException("Time can't be negative");
         }
