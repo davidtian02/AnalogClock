@@ -1,10 +1,11 @@
 public class Runner {
     public static void main(String[] args) {
-        System.out.println("Hello");
+        System.out.println("Hello ");
     }
 
     /**
      * This function calculates the angles for each hand of an analog clock, for a time input.
+     * Edge cases are negative numbers, and that it shouldn't be greater than current system time.
      *
      * @param time in seconds, since epoch
      * @return an array of the angles, in radians, for each hand of an analog clock. [H, M, s] for hours, minutes, seconds
@@ -14,15 +15,17 @@ public class Runner {
     }
 
     /**
-     * for 0 it should be 0. edge cases are negative numbers. also edge case that it can't be greater than current system time.
+     * for 0 it should be 0.
      * for 1 it should be 1/60 * (2*pi), as 60 seconds makes the full circle.
      * for 360, it should ideally say 0, since they are the same, so modulo as well.
      *
-     * @param time
-     * @return
+     * @param time in seconds, since epoch
+     * @return the radian of the seconds clock
      */
     static float calculateSecondHandAngle(int time) {
-        return 0;
+        checkSanity(time);
+
+        return (float) (((time % 60) / 60f) * 2 * Math.PI);
     }
 
     static float calculateMinuteHandAngle(int time) {
@@ -31,5 +34,11 @@ public class Runner {
 
     static float calculateHourHandAngle(int time) {
         return 0;
+    }
+
+    private static void checkSanity(int time) {
+        if (time < 0) {
+            throw new IllegalArgumentException("Time can't be negative");
+        }
     }
 }

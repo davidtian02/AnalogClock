@@ -1,4 +1,3 @@
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -23,7 +22,7 @@ public class RunnerTest {
         assertEquals(expected, result, delta);
     }
 
-    @Test(expected = InvalidArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void calculateSecondHandAngle_withNegativeValue_shouldThrowException() {
         int time = -1;
 
