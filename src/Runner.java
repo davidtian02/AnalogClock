@@ -1,6 +1,12 @@
 import java.util.Scanner;
 
+/**
+ * This class will prompt the user for a time in Epoch, and return the angles of each hand of an analog clock (in radians)
+ */
 public class Runner {
+    /**
+     * Main method to run the application
+     */
     public static void main(String[] args) {
         System.out.println("Please enter a time (in int format):");
         Scanner sc = new Scanner(System.in);
