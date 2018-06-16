@@ -5,8 +5,42 @@ import static org.junit.Assert.*;
 public class RunnerTest {
 
     @Test
-    public void calculateAngles() {
+    public void calculateAngles_withNonZeroValue_shouldReturnAngles() {
+        int time = 3609;
+        float delta = 0.000001f;
+        float expectedHourAngle = (float) (9/(60f * 60 * 12) * 2 * Math.PI);
+        float expectedMinuteAngle = (float) (9/(60f * 60) * 2 * Math.PI);
+        float expectedSecondAngle = (float) (9/60f * 2 * Math.PI);
 
+        float[] result = Runner.calculateAngles(time);
+
+        assertEquals(expectedHourAngle, result[0], delta);
+        assertEquals(expectedMinuteAngle, result[1], delta);
+        assertEquals(expectedSecondAngle, result[2], delta);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void calculateAngles_withNegativeValue_shouldThrowException() {
+        int time = -1;
+
+        Runner.calculateAngles(time);
+
+        // no - op
+    }
+
+    @Test
+    public void calculateAngles_withOverFullCircle_shouldReturnBaseValue() {
+        int time = 43210;
+        float delta = 0.000001f;
+        float expectedHourAngle = (float) (10/(60f * 60 * 12) * 2 * Math.PI);
+        float expectedMinuteAngle = (float) (10/(60f * 60) * 2 * Math.PI);
+        float expectedSecondAngle = (float) (10/60f * 2 * Math.PI);
+
+        float[] result = Runner.calculateAngles(time);
+
+        assertEquals(expectedHourAngle, result[0], delta);
+        assertEquals(expectedMinuteAngle, result[1], delta);
+        assertEquals(expectedSecondAngle, result[2], delta);
     }
 
     // ========================== testing seconds ==========================
@@ -14,7 +48,7 @@ public class RunnerTest {
     @Test
     public void calculateSecondHandAngle_withNonZeroValue_shouldReturnAngle() {
         int time = 1;
-        float delta = 0.001f;
+        float delta = 0.000001f;
         float expected = (float) (1/60f * 2 * Math.PI);
 
         float result = Runner.calculateSecondHandAngle(time);
@@ -35,7 +69,7 @@ public class RunnerTest {
     public void calculateSecondHandAngle_withOverFullCircle_shouldReturnBaseValue() {
         int time1 = 60;
         int time2 = 62;
-        float delta = 0.001f;
+        float delta = 0.000001f;
         float expected1 = (float) (0/60f * 2 * Math.PI);
         float expected2 = (float) (2/60f * 2 * Math.PI);
 
@@ -52,7 +86,7 @@ public class RunnerTest {
     public void calculateMinuteHandAngle_withNonZeroValue_shouldReturnAngle() {
         int time1 = 1;
         int time2 = 60;
-        float delta = 0.001f;
+        float delta = 0.000001f;
         float expected1 = (float) ( 1/(60f * 60) * 2 * Math.PI);
         float expected2 = (float) (60/(60f * 60) * 2 * Math.PI);
 
