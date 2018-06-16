@@ -8,7 +8,7 @@ public class RunnerTest {
     public void calculateAngles_withNonZeroValue_shouldReturnAngles() {
         int time = 3609;
         float delta = 0.000001f;
-        float expectedHourAngle = (float) (9/(60f * 60 * 12) * 2 * Math.PI);
+        float expectedHourAngle = (float) (3609/(60f * 60 * 12) * 2 * Math.PI);
         float expectedMinuteAngle = (float) (9/(60f * 60) * 2 * Math.PI);
         float expectedSecondAngle = (float) (9/60f * 2 * Math.PI);
 

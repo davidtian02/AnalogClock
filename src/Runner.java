@@ -11,7 +11,9 @@ public class Runner {
      * @return an array of the angles, in radians, for each hand of an analog clock. [H, M, s] for hours, minutes, seconds
      */
     static float[] calculateAngles(int time) {
-        return new float[]{0f, 0f, 0f};
+        validateInput(time);
+
+        return new float[]{calculateHourHandAngle(time), calculateMinuteHandAngle(time), calculateSecondHandAngle(time)};
     }
 
     /**
