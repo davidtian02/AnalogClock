@@ -1,6 +1,16 @@
+import java.util.Scanner;
+
 public class Runner {
     public static void main(String[] args) {
-        System.out.println("Hello ");
+        System.out.println("Please enter a time (in int format):");
+        Scanner sc = new Scanner(System.in);
+        int time = sc.nextInt();
+        if (time < 0) {
+            System.out.println("Please enter a non-negative number for time");
+        } else {
+            float[] angles = calculateAngles(time);
+            System.out.println("H: " + angles[0] + ", M: " + angles[1] + ", S: " + angles[2]);
+        }
     }
 
     /**
