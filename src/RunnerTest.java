@@ -77,8 +77,8 @@ public class RunnerTest {
         int time1 = 3600;
         int time2 = 3607;
         float delta = 0.001f;
-        float expected1 = (float) (0/60f * 2 * Math.PI);
-        float expected2 = (float) (7/60f * 2 * Math.PI);
+        float expected1 = (float) (0/(60f * 60) * 2 * Math.PI);
+        float expected2 = (float) (7/(60f * 60) * 2 * Math.PI);
 
         float result1 = Runner.calculateMinuteHandAngle(time1);
         float result2 = Runner.calculateMinuteHandAngle(time2);

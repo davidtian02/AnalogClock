@@ -20,7 +20,7 @@ public class Runner {
      * for 360, it should ideally say 0, since they are the same, so modulo as well.
      *
      * @param time in seconds, since epoch
-     * @return the radian of the seconds clock
+     * @return the radian of the seconds hand
      */
     static float calculateSecondHandAngle(int time) {
         checkSanity(time);
@@ -28,8 +28,15 @@ public class Runner {
         return (float) (((time % 60) / 60f) * 2 * Math.PI);
     }
 
+    /**
+     * same as seconds, but for minutes, so need to go at a much slower rate... 60x slower, in fact.
+     * @param time in seconds, since epoch
+     * @return the radian of the minutes hand
+     */
     static float calculateMinuteHandAngle(int time) {
-        return 0;
+        checkSanity(time);
+
+        return (float) (((time % (60*60)) / (60*60f)) * 2 * Math.PI); // TODO apply some optimization on math here
     }
 
     static float calculateHourHandAngle(int time) {
